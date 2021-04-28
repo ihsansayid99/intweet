@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Tweet Unik dengan Design terbaik',
+    title: 'InTweet - Design kan Tweet Kamu',
     htmlAttrs: {
       lang: 'id'
     },
@@ -36,6 +36,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "@nuxtjs/svg"
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -20,12 +20,14 @@ module.exports = {
       white: colors.white,
       gray: colors.coolGray,
       red: colors.red,
-      yellow: colors.amber,
-      green: colors.emerald,
-      blue: colors.blue,
-      indigo: colors.indigo,
-      purple: colors.violet,
-      pink: colors.pink,
+      blue: {
+        light: '#bbe1fa',
+        DEFAULT: '#35495e'
+      },
+      indigo:{
+        light: '#ffc801',
+        DEFAULT: '#ddaf06'
+      }
     },
     spacing: {
       px: '1px',

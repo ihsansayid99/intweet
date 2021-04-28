@@ -1,9 +1,10 @@
 <template>
   <div>
     <Navbar />
-    <div class="px-6 md:px-24 py-8 mt-20">
+    <div class="py-8 mt-20">
       <Nuxt />
     </div>
+    <Footer />
   </div>
 </template>
 

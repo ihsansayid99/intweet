@@ -4,15 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "build": "nuxt generate"
   },
   "dependencies": {
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3"
   },
   "devDependencies": {
+    "@nuxtjs/svg": "^0.1.12",
     "@nuxtjs/tailwindcss": "^4.0.3",
     "postcss": "^8.2.8"
   }
