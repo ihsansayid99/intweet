@@ -1,15 +1,12 @@
 <template>
-    <div class="navbar">
+    <nav class="navbar">
         <div class="navbar-brand relative">
             <nuxt-link to="/"><Logo /></nuxt-link>
             <button v-on:click="isHamburger" class="hamburger-menu">
                 <Humburger role="button"/>
             </button>
         </div>
-        <!-- <div class="humburger-menu">
-            
-        </div> -->
-        <div class="navs" v-bind:class="isMenuMobile === false ? 'hidden' : 'flex'">
+        <div class="navs" :class="isMenuMobile === true ? 'h-32' : 'h-0'">
             <div class="nav-menu">
                 <ul>
                     <li><nuxt-link to="/" class="nuxt-link">Cara Pakai</nuxt-link></li>
@@ -21,7 +18,7 @@
                 <button class="btn-outline border-b">Login</button>
             </div>
         </div>
-    </div>
+    </nav>
 </template>
 
 <script>
@@ -41,10 +38,10 @@ export default {
 
 <style lang="postcss" scoped>
 .navbar{
-    @apply bg-blue-600 px-8 md:px-24 py-5 md:flex items-center justify-between;
+    @apply bg-blue-600 fixed w-full top-0 px-8 md:px-24 py-5 md:flex items-center justify-between;
 }
 .navs{
-    @apply md:flex items-center justify-between md:justify-between py-5 md:py-0;
+    @apply flex items-center justify-between md:justify-between md:py-0 transition-all overflow-hidden md:overflow-visible ease-out duration-500 md:transition-none;
     width: 100%;
 }
 .navbar-brand{
