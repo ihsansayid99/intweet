@@ -14,7 +14,7 @@
                 </ul>
             </div>
             <div class="navs-utils">
-                <button class="btn-primary-indigo mr-2">Buat Sekarang!</button>
+                <nuxt-link class="btn-primary-indigo mr-2" to="/membuat">Buat Sekarang!</nuxt-link>
                 <button class="btn-outline">Login</button>
             </div>
         </div>

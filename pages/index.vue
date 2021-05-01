@@ -26,7 +26,7 @@
           <div class="w-full lg:w-1/2 pt-10 lg:pt-60 lg:pb-8 xl:px-32">
             <h1 class="text-3xl lg:text-5xl font-bold text-blue">Buat Design dari Tweet Yang Kamu Inginkan</h1>
             <p class="text-sm mt-4 text-gray-500">Dengan mudah, kamu bisa cari tweet yang menurut kamu unik, buat design dan share ke social media punya kamu.</p>
-            <button class="px-10 py-2 bg-indigo rounded mt-4 mr-0 font-bold text-white hover:bg-indigo-light hover:transition-colors duration-300">Mulai</button>
+              <nuxt-link to="/membuat"><button class="px-10 py-2 bg-indigo rounded mt-4 mr-0 font-bold text-white hover:bg-indigo-light hover:transition-colors duration-300">Mulai</button></nuxt-link>
           </div>
           <div class="w-full lg:w-1/2 pt-10">
             <div class="">
