@@ -4,113 +4,38 @@
             <h1 class="text-3xl lg:text-5xl text-center leading-normal lg:leading-relaxed font-bold text-blue max-w-3xl mx-auto">Upload Link Tweet atau cari Akun Yang akan di Proses</h1>
             <div class="text-center mt-10">
                 <input type="text" v-model="linkTweet" class="border-2 rounded-md border-indigo md:w-1/2 w-full px-2 py-2 focus:outline-none focus:border-indigo-light">
-                <button v-on:click="getTweet()" class="bg-indigo mt-4 lg:mt-0 rounded px-6 py-2 border-2 border-indigo text-white font-bold hover:bg-indigo-light hover:transition-colors hover:duration-200">Proses</button>
             </div>  
-            <div class="border-2 border-blue-light mt-12 px-2 py-3 rounded-md">
-                <h2 class="text-2xl text-center text-blue">Sesuaikan Design Kamu</h2>
-                <hr class="w-16 border-b-4 rounded-xl border-indigo mx-auto mt-2">
-                <div class="flex flex-col lg:flex-row">
-                    <div class="w-full lg:w-1/3 my-6 h-4/5 relative">
-                        <div class="iphone-x transition-all duration-300" :class="activeBgColor">
-                            <i>Speaker</i>
-                            <b>Camera</b>
-                            <!-- <div class="box-tweet bg-gray-100 shadow-lg w-4/5 mx-auto px-4 py-3 rounded-md">
-                                <div class="tweet flex text-gray-600">
-                                    <div class="w-2/12 mr-2">
-                                        <img src="https://pbs.twimg.com/profile_images/1298946580251152384/XM26cVA6_400x400.jpg" alt="" width="50" height="50" class="rounded-full">
-                                    </div>
-                                    <div class="w-10/12">
-                                        <div class="inline-flex items-center -mt-4">
-                                            <p class="font-bold">Happy May</p>
-                                            <span class="font-light ml-1 text-xs">@lastformat</span>
-                                        </div>
-                                        <div class="text-tweet text-sm leading-relaxed mt-1">
-                                            <p>Kalian semua ngen!</p>
-                                        </div>
-                                        <div class="text-xs mt-4">
-                                            <p>Apr 29, 2021 &middot; Twitter for iPhone</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <div class="box-tweet w-4/5">
-                                <Tweet id="1389187383719981068" :options="{ theme: 'hidden', width: '500', cards: 'hidden'}"></Tweet>
-                            </div>
-                            <div class="credit-intweet-in-box w-full text-center">
-                                <p class="text-gray-200 text-sm">Made with &#9825; by InTweet.id</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-2/3 px-10 py-5 mx-0 lg:mx-4 my-6">
-                        <h4 class="text-2xl text-gray-700">Solid Color</h4>
-                        <hr class="w-16 border-b-4 rounded-xl border-indigo mt-2">
-                        <div class="my-6 h-36 w-full lg:w-4/5 grid grid-cols-5 lg:grid-cols-10 grid-flow-row">
-                            <div class="relative" v-for="sc in solidColors" v-bind:class="sc">
-                                <button class="absolute inset-0 w-full text-gray-600 text-xs opacity-0 hover:opacity-100 hover:transition-opacity focus:outline-none" v-on:click="addSolidColor(sc)">
-                                    {{ sc.substr(6).split("-")[0] }}
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-2xl text-gray-700">Gradient Color</h4>
-                        <hr class="w-16 border-b-4 rounded-xl border-indigo mt-2">
-                        <div class="my-6 h-36 w-full lg:w-4/5 grid grid-cols-5 lg:grid-cols-10 grid-flow-row">
-                            <div class="relative" v-for="gc in gradColors" v-bind:class="gc">
-                                <button class="absolute inset-0 w-full text-gray-600 text-xs opacity-0 hover:opacity-100 hover:transition-opacity focus:outline-none" v-on:click="addGradientColor(gc)">
-                                    {{ gc.substr(10).split("-")[0] }}
-                                </button>
-                            </div>
-                        </div>
-                        <div class="tweet-proses mt-4">
-                            <button class="px-7 py-2 bg-indigo rounded text-white font-bold hover:bg-indigo-light">PROSES</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Loading v-if="responseLink"/>
+            <h2 class="text-center text-lg text-indigo mt-4" v-if="responseLink === false">Masukan Link yang benar yaa!</h2>
+            <nuxt-link :to="{ path: 'customize', query: { url: linkTweet }}">www</nuxt-link>
         </div>
     </div>
 </template>
 
 <script>
-import {Tweet} from 'vue-tweet-embed'
 export default {
-    components:{
-        Tweet
-    },
     data: function(){
         return {
-            solidColors: ['color-brown-warm', 'color-orange-warm', 'color-purple-warm', 'color-green-vintage', 'color-blue-vintage', 'color-yellow-warm', 'color-blue-retro', 'color-gray-retro', 'color-pink-retro',
-            'color-darkgreen-retro', 'color-green-bright', 'color-greenlight-bright', 'color-pinklight-bright', 'color-pink-bright', 'color-gray-turquoise', 'color-orange-turquoise', 'color-green-turquoise', 'color-blue-turquoise',
-            'color-yellow-neon', 'color-darkbrown-neon'],
-            gradColors: ['colorgrad-scooter','colorgrad-autumn', 'colorgrad-coolblues', 'colorgrad-alive', 'colorgrad-relay', 'colorgrad-meridian', 'colorgrad-cryclear', 'colorgrad-chitty', 'colorgrad-sunkies', 'colorgrad-orca', 'colorgrad-feeltonight', 'colorgrad-roseanna',
-            'colorgrad-roselens', 'colorgrad-dawn', 'colorgrad-80spurple', 'colorgrad-edsunset', 'colorgrad-lovecouple', 'colorgrad-royal', 'colorgrad-orangejuice', 'colorgrad-harmonic'],
-            activeBgColor: 'color-yellow-warm',
             linkTweet: '',
-            aa: {}
+            responseLink: '',
+            tweetId: ''
         }
     },
-    methods:{
-        addSolidColor : function(val){
-            this.activeBgColor = val
-        },
-        addGradientColor : function(val){
-            this.activeBgColor = val
-        },
-        async getTweet(){
-            // const tweet = await fetch(`https://publish.twitter.com/oembed?url=https://twitter.com/ladazaa/status/1389187383719981068?s=20&cards=hidden`).then(res =>
-            //     res.json()
-            // )
-            const tweet = `https://publish.twitter.com/oembed?url=https://twitter.com/ladazaa/status/1389187383719981068?s=20&cards=hidden`;
-            const aa = await this.$axios.$get(tweet)
-            console.log(aa)
-            return { aa }
+    watch: {
+        linkTweet: function(newLink, oldLink){
+            if(this.linkTweet.includes('/status/')){
+                this.responseLink = true
+                const url = this.linkTweet.split('?');
+                url.splice(1);
+                const fixUrl = url[0].split('/')
+                this.tweetId = fixUrl[5]
+            }else if(this.linkTweet === ''){
+                this.responseLink = false
+            }else{
+                this.responseLink = false
+            }
         }
-    },
-    // async asyncData({$axios}) {
-    //     console.log(this)
-    //     const tweet = await $axios.$get(`https://publish.twitter.com/oembed?url=https://twitter.com/ladazaa/status/1389187383719981068?s=20&cards=hidden`)
-    //     console.log(tweet)
-    //     return {tweet}
-    // },
+    }
 }
 </script>
 
@@ -217,35 +142,5 @@ export default {
       box-shadow: inset 0px -2px 2px rgba(0, 0, 0, 0.5);
     }
   }
-}
-blockquote.twitter-tweet {
-  display: inline-block;
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 16px;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  margin: 10px 5px;
-  padding: 0 16px 16px 16px;
-  max-width: 468px;
-}
-
-blockquote.twitter-tweet p {
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 20px;
-}
-
-blockquote.twitter-tweet a {
-  color: inherit;
-  font-weight: normal;
-  text-decoration: none;
-  outline: 0 none;
-}
-
-blockquote.twitter-tweet a:hover,
-blockquote.twitter-tweet a:focus {
-  text-decoration: underline;
 }
 </style>
