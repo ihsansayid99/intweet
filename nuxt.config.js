@@ -36,8 +36,13 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    "@nuxtjs/svg"
+    "@nuxtjs/svg",
+    '@nuxt/http',
+    '@nuxtjs/axios'
   ],
+  axios: {
+    proxy: true
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -48,6 +53,8 @@ export default {
     jit: true,
     exposeConfig: false,
     config: {}
+  },
+  env: {
+    bearerTwitter: process.env.BEARER_TOKEN_TWITTER
   }
-
 }

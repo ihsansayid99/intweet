@@ -3,9 +3,9 @@
         <div class="px-4 lg:px-20 xl:px-24 pt-40 py-60">
             <h1 class="text-3xl lg:text-5xl text-center leading-normal lg:leading-relaxed font-bold text-blue max-w-3xl mx-auto">Upload Link Tweet atau cari Akun Yang akan di Proses</h1>
             <div class="text-center mt-10">
-                <input type="text" class="border-2 rounded-md border-indigo md:w-1/2 w-full px-2 py-2 focus:outline-none focus:border-indigo-light">
-                <button class="bg-indigo mt-4 lg:mt-0 rounded px-6 py-2 border-2 border-indigo text-white font-bold hover:bg-indigo-light hover:transition-colors hover:duration-200">Proses</button>
-            </div>
+                <input type="text" v-model="linkTweet" class="border-2 rounded-md border-indigo md:w-1/2 w-full px-2 py-2 focus:outline-none focus:border-indigo-light">
+                <button v-on:click="getTweet()" class="bg-indigo mt-4 lg:mt-0 rounded px-6 py-2 border-2 border-indigo text-white font-bold hover:bg-indigo-light hover:transition-colors hover:duration-200">Proses</button>
+            </div>  
             <div class="border-2 border-blue-light mt-12 px-2 py-3 rounded-md">
                 <h2 class="text-2xl text-center text-blue">Sesuaikan Design Kamu</h2>
                 <hr class="w-16 border-b-4 rounded-xl border-indigo mx-auto mt-2">
@@ -14,7 +14,7 @@
                         <div class="iphone-x transition-all duration-300" :class="activeBgColor">
                             <i>Speaker</i>
                             <b>Camera</b>
-                            <div class="box-tweet bg-gray-100 shadow-lg w-4/5 mx-auto px-4 py-3 rounded-md">
+                            <!-- <div class="box-tweet bg-gray-100 shadow-lg w-4/5 mx-auto px-4 py-3 rounded-md">
                                 <div class="tweet flex text-gray-600">
                                     <div class="w-2/12 mr-2">
                                         <img src="https://pbs.twimg.com/profile_images/1298946580251152384/XM26cVA6_400x400.jpg" alt="" width="50" height="50" class="rounded-full">
@@ -32,6 +32,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div> -->
+                            <div class="box-tweet w-4/5">
+                                <Tweet id="1389187383719981068" :options="{ theme: 'hidden', width: '500', cards: 'hidden'}"></Tweet>
                             </div>
                             <div class="credit-intweet-in-box w-full text-center">
                                 <p class="text-gray-200 text-sm">Made with &#9825; by InTweet.id</p>
@@ -68,7 +71,11 @@
 </template>
 
 <script>
+import {Tweet} from 'vue-tweet-embed'
 export default {
+    components:{
+        Tweet
+    },
     data: function(){
         return {
             solidColors: ['color-brown-warm', 'color-orange-warm', 'color-purple-warm', 'color-green-vintage', 'color-blue-vintage', 'color-yellow-warm', 'color-blue-retro', 'color-gray-retro', 'color-pink-retro',
@@ -77,6 +84,8 @@ export default {
             gradColors: ['colorgrad-scooter','colorgrad-autumn', 'colorgrad-coolblues', 'colorgrad-alive', 'colorgrad-relay', 'colorgrad-meridian', 'colorgrad-cryclear', 'colorgrad-chitty', 'colorgrad-sunkies', 'colorgrad-orca', 'colorgrad-feeltonight', 'colorgrad-roseanna',
             'colorgrad-roselens', 'colorgrad-dawn', 'colorgrad-80spurple', 'colorgrad-edsunset', 'colorgrad-lovecouple', 'colorgrad-royal', 'colorgrad-orangejuice', 'colorgrad-harmonic'],
             activeBgColor: 'color-yellow-warm',
+            linkTweet: '',
+            aa: {}
         }
     },
     methods:{
@@ -85,8 +94,23 @@ export default {
         },
         addGradientColor : function(val){
             this.activeBgColor = val
+        },
+        async getTweet(){
+            // const tweet = await fetch(`https://publish.twitter.com/oembed?url=https://twitter.com/ladazaa/status/1389187383719981068?s=20&cards=hidden`).then(res =>
+            //     res.json()
+            // )
+            const tweet = `https://publish.twitter.com/oembed?url=https://twitter.com/ladazaa/status/1389187383719981068?s=20&cards=hidden`;
+            const aa = await this.$axios.$get(tweet)
+            console.log(aa)
+            return { aa }
         }
-    }
+    },
+    // async asyncData({$axios}) {
+    //     console.log(this)
+    //     const tweet = await $axios.$get(`https://publish.twitter.com/oembed?url=https://twitter.com/ladazaa/status/1389187383719981068?s=20&cards=hidden`)
+    //     console.log(tweet)
+    //     return {tweet}
+    // },
 }
 </script>
 
@@ -193,5 +217,35 @@ export default {
       box-shadow: inset 0px -2px 2px rgba(0, 0, 0, 0.5);
     }
   }
+}
+blockquote.twitter-tweet {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 16px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  margin: 10px 5px;
+  padding: 0 16px 16px 16px;
+  max-width: 468px;
+}
+
+blockquote.twitter-tweet p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+blockquote.twitter-tweet a {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
+  outline: 0 none;
+}
+
+blockquote.twitter-tweet a:hover,
+blockquote.twitter-tweet a:focus {
+  text-decoration: underline;
 }
 </style>
