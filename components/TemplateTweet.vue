@@ -92,12 +92,7 @@ export default {
         addGradientColor : function(val){
             this.activeBgColor = val
         }
-    },
-    watch:{
-        url: function(){
-            console.log(this.url)
-        }
-    },
+    }
 }
 </script>
 

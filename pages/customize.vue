@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TemplateTweet :url="link" />
+        <TemplateTweet :url="$route.query.url" />
     </div>
 </template>
 
@@ -10,9 +10,6 @@ export default {
         return {
             link : this.$route.query.url
         }
-    },
-    mounted(){
-        this.link = this.$route.query.url
     }
 }
 </script>
