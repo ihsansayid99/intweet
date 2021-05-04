@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TemplateTweet :tweet-id="link" />
+        <TemplateTweet :tweet-id="link" :key="link" />
     </div>
 </template>
 

@@ -68,6 +68,9 @@ export default {
     head(){
         return{
             title: 'Customize - Intweet',
+            script: [
+              { src:"https://platform.twitter.com/js/horizon_tweet.2bd42981e3af03ce9186a5655508da28.js", async: true, defer: true, charset: 'utf-8' }
+            ]
         }
     },
     data: function(){
@@ -87,15 +90,11 @@ export default {
         },
         addGradientColor : function(val){
             this.activeBgColor = val
-            console.log(this.$el.childNodes[0].childNodes[4].childNodes[0].childNodes[0].childNodes[4])
-            console.log(this.$refs)
         }
     },
     mounted() {
     if (this.tweetId)
         twttr.widgets.createTweet(this.tweetId, this.$el.childNodes[0].childNodes[4].childNodes[0].childNodes[0].childNodes[4])
-    else
-        twttr.widgets.load(this.$el.childNodes[0].childNodes[4].childNodes[0].childNodes[0].childNodes[4])
     }
 }
 </script>
