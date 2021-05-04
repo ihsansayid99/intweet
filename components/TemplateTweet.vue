@@ -28,7 +28,7 @@
                             </div>
                         </div> -->
                         <div class="box-tweet w-4/5">
-                            <blockquote class="twitter-tweet"><a :href="url"></a></blockquote><script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <blockquote class="twitter-tweet"><a :href="url"></a></blockquote>
                         </div>
                         <div class="credit-intweet-in-box w-full text-center">
                             <p class="text-gray-200 text-sm">Made with &#9825; by InTweet.id</p>
@@ -66,6 +66,14 @@
 <script>
 export default {
     props: ['url'],
+    head(){
+        return{
+            title: 'Customize - Intweet',
+            script: [
+                {src: 'https://platform.twitter.com/widgets.js', defer: true}
+            ]
+        }
+    },
     data: function(){
         return {
             solidColors: ['color-brown-warm', 'color-orange-warm', 'color-purple-warm', 'color-green-vintage', 'color-blue-vintage', 'color-yellow-warm', 'color-blue-retro', 'color-gray-retro', 'color-pink-retro',

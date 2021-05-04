@@ -11,5 +11,8 @@ export default {
             link : this.$route.query.url
         }
     },
+    mounted(){
+        this.link = this.$route.query.url
+    }
 }
 </script>
