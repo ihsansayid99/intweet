@@ -10,6 +10,10 @@ export default {
         return {
             link : this.$route.query.url
         }
-    }
+    },
+    
+    async asyncData({$axios}) {
+        console.log('wkwkwk')
+    },
 }
 </script>

@@ -92,7 +92,10 @@ export default {
         addGradientColor : function(val){
             this.activeBgColor = val
         }
-    }
+    },
+    async asyncData({$axios}) {
+        console.log('ini dari template')
+    },
 }
 </script>
 
