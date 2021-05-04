@@ -68,9 +68,6 @@ export default {
     head(){
         return{
             title: 'Customize - Intweet',
-            script: [
-                { hid: 'twitter', type: 'text/javascript', src: '//platform.twitter.com/widgets.js', async: true, defer: true }
-            ]
         }
     },
     data: function(){

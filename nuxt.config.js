@@ -15,6 +15,9 @@ export default {
       { rel: 'preconnect', href: 'https://fonts.gstatic.com'},
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap'},
     ],
+    script: [
+        { hid: 'twitter', type: 'text/javascript', src: '//platform.twitter.com/widgets.js', async: true, defer: true }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
