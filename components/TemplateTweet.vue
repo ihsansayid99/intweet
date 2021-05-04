@@ -27,8 +27,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="box-tweet w-4/5">
-                            <blockquote class="twitter-tweet"><a :href="url"></a></blockquote>
+                        <div class="box-tweet w-4/5" id="boxtweet" v-html="oembedHtml">
                         </div>
                         <div class="credit-intweet-in-box w-full text-center">
                             <p class="text-gray-200 text-sm">Made with &#9825; by InTweet.id</p>
@@ -65,12 +64,12 @@
 
 <script>
 export default {
-    props: ['url'],
+    props: ['oembedHtml', 'tweetId'],
     head(){
         return{
             title: 'Customize - Intweet',
             script: [
-                {src: 'https://platform.twitter.com/widgets.js', defer: true}
+                { hid: 'twitter', type: 'text/javascript', src: '//platform.twitter.com/widgets.js', async: true, defer: true }
             ]
         }
     },
@@ -91,11 +90,16 @@ export default {
         },
         addGradientColor : function(val){
             this.activeBgColor = val
+            console.log(this.$el.childNodes[0].childNodes[4].childNodes[0].childNodes[0].childNodes[4])
+            console.log(this.$refs)
         }
     },
-    async asyncData({$axios}) {
-        console.log('ini dari template')
-    },
+    mounted() {
+    if (this.tweetId)
+        twttr.widgets.createTweet(this.tweetId, this.$el.childNodes[0].childNodes[4].childNodes[0].childNodes[0].childNodes[4])
+    else
+        twttr.widgets.load(this.$el.childNodes[0].childNodes[4].childNodes[0].childNodes[0].childNodes[4])
+    }
 }
 </script>
 

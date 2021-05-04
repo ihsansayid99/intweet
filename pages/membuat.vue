@@ -4,7 +4,7 @@
             <h1 class="text-3xl lg:text-5xl text-center leading-normal lg:leading-relaxed font-bold text-blue max-w-3xl mx-auto">Upload Link Tweet atau cari Akun Yang akan di Proses</h1>
             <div class="text-center mt-10">
                 <input type="text" v-model="linkTweet" class="border-2 rounded-md border-indigo md:w-1/2 w-full px-2 py-2 focus:outline-none focus:border-indigo-light">
-                <nuxt-link :to="{ path: 'customize', query: { url: linkTweet }}" class="px-6 py-2 font-bold bg-indigo border-2 rounded-md border-indigo text-white">Up</nuxt-link>
+                <nuxt-link :to="{ path: 'customize', query: { url: tweetId }}" class="px-6 py-2 font-bold bg-indigo border-2 rounded-md border-indigo text-white">Up</nuxt-link>
             </div>  
             <Loading v-if="responseLink"/>
             <h2 class="text-center text-lg text-indigo mt-4" v-if="responseLink === false">Masukan Link yang benar yaa!</h2>
