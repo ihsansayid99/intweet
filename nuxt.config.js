@@ -40,7 +40,6 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "@nuxtjs/svg",
-    '@nuxt/http',
     '@nuxtjs/axios'
   ],
   axios: {
