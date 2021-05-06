@@ -16,7 +16,7 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap'},
     ],
     script: [
-        { hid: 'twitter', type: 'text/javascript', src: '//platform.twitter.com/widgets.js', async: true, defer: true }
+        {type: 'text/javascript', src: '//platform.twitter.com/widgets.js', async: true, defer: true }
     ]
   },
 
@@ -26,6 +26,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {
+      src: '~plugins/html2canvas.js', ssr: false
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,7 +43,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "@nuxtjs/svg",
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
   axios: {
     proxy: true
@@ -58,5 +61,10 @@ export default {
   },
   env: {
     bearerTwitter: process.env.BEARER_TOKEN_TWITTER
+  },
+  loading: {
+    continuous: true,
+    color: 'blue',
+    height: '3px'
   }
 }

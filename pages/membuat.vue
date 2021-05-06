@@ -4,9 +4,9 @@
             <h1 class="text-3xl lg:text-5xl text-center leading-normal lg:leading-relaxed font-bold text-blue max-w-3xl mx-auto">Upload Link Tweet atau cari Akun Yang akan di Proses</h1>
             <div class="text-center mt-10">
                 <input type="text" v-model="linkTweet" class="border-2 rounded-md border-indigo md:w-1/2 w-full px-2 py-2 focus:outline-none focus:border-indigo-light mb-6">
-                <nuxt-link :to="{ path: 'customize', query: { url: tweetId }}" class="px-6 py-2 font-bold bg-indigo border-2 rounded-md border-indigo text-white">Up</nuxt-link>
+                <button class="px-6 py-2 font-bold bg-indigo border-2 rounded-md border-indigo text-white" @click="submitLink">Up</button>
             </div>
-            <h2 class="text-center text-lg text-indigo mt-4" v-if="responseLink === false">Masukan Link yang benar yaa!</h2>
+            <!-- <h2 class="text-center text-lg text-indigo mt-4" v-if="loadTweetImage === false">Loading...</h2> -->
         </div>
     </div>
 </template>
@@ -17,24 +17,17 @@ export default {
         return {
             linkTweet: '',
             responseLink: '',
-            tweetId: ''
+            tweetId: '',
+            tweetImage: '',
+            loadTweetImage: false
         }
     },
-    watch: {
-        linkTweet: function(newLink, oldLink){
-            if(this.linkTweet.includes('/status/')){
-                this.responseLink = true
-                const url = this.linkTweet.split('?');
-                url.splice(1);
-                const fixUrl = url[0].split('/')
-                this.tweetId = fixUrl[5]
-            }else if(this.linkTweet === ''){
-                this.responseLink = false
-            }else{
-                this.responseLink = false
-            }
-        }
-    }
+    methods:{
+      async submitLink() {
+        this.tweetImage = await this.$axios.$get('https://intweet-backend.herokuapp.com/screenshot?url=https://www.google.com')
+        console.log(this.tweetImage)
+    },
+  }
 }
 </script>
 

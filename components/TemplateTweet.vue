@@ -64,12 +64,6 @@
 
 <script>
 export default {
-    props: ['oembedHtml', 'tweetId'],
-    head(){
-        return{
-            title: 'Customize - Intweet',
-        }
-    },
     data: function(){
         return {
             solidColors: ['color-brown-warm', 'color-orange-warm', 'color-purple-warm', 'color-green-vintage', 'color-blue-vintage', 'color-yellow-warm', 'color-blue-retro', 'color-gray-retro', 'color-pink-retro',
@@ -89,12 +83,6 @@ export default {
             this.activeBgColor = val
         }
     },
-    mounted() {
-    if (this.tweetId)
-        twttr.widgets.createTweet(this.tweetId, this.$el.childNodes[0].childNodes[4].childNodes[0].childNodes[0].childNodes[4])
-    else
-        twttr.widgets.load(this.$el.childNodes[0].childNodes[4].childNodes[0].childNodes[0].childNodes[4])
-    }
 }
 </script>
 

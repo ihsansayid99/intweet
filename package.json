@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "nuxt",
     "start": "nuxt start",
-    "build": "nuxt generate"
+    "build": "nuxt generate",
+    "postinstall": "node script"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
     "core-js": "^3.9.1",
+    "html2canvas": "*",
     "nuxt": "^2.15.3",
     "vue-tweet-embed": "^2.4.0"
   },
