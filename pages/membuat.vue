@@ -24,7 +24,9 @@ export default {
     },
     methods:{
       async submitLink() {
-        this.tweetImage = await this.$axios.$get('https://intweet-backend.herokuapp.com/screenshot?url=https://www.google.com')
+        this.tweetImage = await this.$axios.$post('https://intweet-backend.herokuapp.com/api/screenshot', {
+          url: this.linkTweet
+        })
         console.log(this.tweetImage)
     },
   }
