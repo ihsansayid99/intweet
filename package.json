@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "build": "nuxt build",
     "start": "nuxt start",
-    "build": "nuxt generate",
-    "postinstall": "node script"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
