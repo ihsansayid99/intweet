@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar z-10">
         <div class="navbar-brand relative">
-            <nuxt-link to="/"><Logo /></nuxt-link>
+            <nuxt-link to="/" prefetch><img src="~assets/images/logo.svg" alt="intweet logo" width="100"></nuxt-link>
             <button v-on:click="isHamburger" class="hamburger-menu">
                 <Humburger :isOpen="isMenuMobile === true ? 'open' : ''" />
             </button>
@@ -9,13 +9,13 @@
         <div class="navs" :class="isMenuMobile === true ? 'h-32 pt-4' : 'h-0'">
             <div class="nav-menu">
                 <ul>
-                    <li><nuxt-link to="/" class="nuxt-link">Cara Pakai</nuxt-link></li>
+                    <li><nuxt-link to="/cara-pakai" class="nuxt-link">Cara Pakai</nuxt-link></li>
                     <li><nuxt-link to="/tentang" class="nuxt-link">Tentang</nuxt-link></li>
                 </ul>
             </div>
-            <div class="navs-utils">
-                <nuxt-link class="btn-primary-indigo mr-2" to="/membuat">Buat Sekarang!</nuxt-link>
-                <button class="btn-outline">Login</button>
+            <div class="navs-utils mb-4 lg:mb-0">
+                <nuxt-link class="btn-primary-indigo mr-2" to="/membuat" prefetch>Buat Sekarang!</nuxt-link>
+                <!-- <button class="btn-outline">Login</button> -->
             </div>
         </div>
     </nav>
@@ -27,6 +27,9 @@ export default {
         return {
             isMenuMobile: false
         }
+    },
+    mounted(){
+        this.isMenuMobile = false
     },
     methods:{
         isHamburger: function(){

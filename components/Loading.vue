@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="loading-page">
         <div class="loading">
             <div class="dotcolor"></div>
             <div class="dotcolor"></div>
@@ -7,15 +7,42 @@
         </div>  
     </div>
 </template>
+<script>
+  export default {
+    data: () => ({
+      loading: false
+    }),
+    methods: {
+      start () {
+        this.loading = true
+      },
+      finish () {
+        this.loading = false
+      }
+    }
+  }
+  </script>
 <style lang="postcss">
-
+.loading-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding-top: 350px;
+    font-size: 30px;
+    font-family: sans-serif;
+  }
 .loading {
   width: 300px;
   height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px auto;
+  margin: 0 auto;
+  
 }
 
 

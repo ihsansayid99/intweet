@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="border-2 border-blue-light mt-12 px-2 py-3 rounded-md">
+        <div class="mt-12 px-2 py-3 rounded-md">
             <h2 class="text-2xl text-center text-blue">Sesuaikan Design Kamu</h2>
             <hr class="w-16 border-b-4 rounded-xl border-indigo mx-auto mt-2">
             <div class="flex flex-col lg:flex-row">
@@ -27,7 +27,8 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="box-tweet w-4/5" id="boxtweet" v-html="oembedHtml">
+                        <div class="box-tweet w-10/12">
+                            <img class="rounded-xl shadow-2xl" :src="'data:image/png;base64,' + imgTweet" alt="intweet image tweet id" draggable="false">
                         </div>
                         <div class="credit-intweet-in-box w-full text-center">
                             <p class="text-gray-200 text-sm">Made with &#9825; by InTweet.id</p>
@@ -54,9 +55,17 @@
                         </div>
                     </div>
                     <div class="tweet-proses mt-4">
-                        <button class="px-7 py-2 bg-indigo rounded text-white font-bold hover:bg-indigo-light">PROSES</button>
+                        <button class="px-7 py-3 bg-indigo rounded text-white font-bold hover:bg-indigo-light" @click="downloadVisualReport">Download Template</button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div :class="activeBgColor" ref="imgTweetDownload" style="height: 1920px; width: 1080px;position:absolute;top:0;left:-9999999999px;">
+            <div class="box-tweet w-10/12 text-center">
+                <img class="shadow-2xl" :src="'data:image/png;base64,' + imgTweet" alt="intweet image tweet id" style="border-radius: 20px; border: 2px solid white">
+            </div>
+            <div class="credit-intweet-in-box w-full text-center">
+                <p class="text-gray-200" style="font-size: 34px;">Made with &#9825; by InTweet.id</p>
             </div>
         </div>
     </div>
@@ -64,7 +73,8 @@
 
 <script>
 export default {
-    data: function(){
+    props: ['imgTweet', 'tweetId'],
+    data(){
         return {
             solidColors: ['color-brown-warm', 'color-orange-warm', 'color-purple-warm', 'color-green-vintage', 'color-blue-vintage', 'color-yellow-warm', 'color-blue-retro', 'color-gray-retro', 'color-pink-retro',
             'color-darkgreen-retro', 'color-green-bright', 'color-greenlight-bright', 'color-pinklight-bright', 'color-pink-bright', 'color-gray-turquoise', 'color-orange-turquoise', 'color-green-turquoise', 'color-blue-turquoise',
@@ -72,7 +82,7 @@ export default {
             gradColors: ['colorgrad-scooter','colorgrad-autumn', 'colorgrad-coolblues', 'colorgrad-alive', 'colorgrad-relay', 'colorgrad-meridian', 'colorgrad-cryclear', 'colorgrad-chitty', 'colorgrad-sunkies', 'colorgrad-orca', 'colorgrad-feeltonight', 'colorgrad-roseanna',
             'colorgrad-roselens', 'colorgrad-dawn', 'colorgrad-80spurple', 'colorgrad-edsunset', 'colorgrad-lovecouple', 'colorgrad-royal', 'colorgrad-orangejuice', 'colorgrad-harmonic'],
             activeBgColor: 'color-yellow-warm',
-            link: ''
+            output: null
         }
     },
     methods:{
@@ -81,7 +91,38 @@ export default {
         },
         addGradientColor : function(val){
             this.activeBgColor = val
-        }
+        },
+        showCaptureRef() {
+            let vc = this;
+            return vc.$refs.imgTweetDownload;
+        },
+        async downloadVisualReport () {
+            await this.$html2canvas(this.showCaptureRef(), {
+                scrollX: 0,
+                scrollY: -window.scrollY,
+            }).then(canvas => {
+                this.saveImage(canvas.toDataURL("image/jpeg"), `intweet-${this.tweetId}.png`)
+            }).catch((error) => {
+                console.log("Tidak Dapat Membuat Template", error)
+            });
+            location.reload()
+        },
+        saveImage(uri, filename){
+            const link = document.createElement('a');
+            if(typeof link.download === 'string'){
+                link.href = uri
+                link.download = filename
+
+                document.body.appendChild(link)
+
+                link.click()
+
+                document.body.removeChild(link)
+            }else{
+                window.open(uri)
+            }
+        },
+        
     },
 }
 </script>
@@ -90,7 +131,7 @@ export default {
 .box-tweet{
     margin: 0;
     position: absolute;
-    top: 50%;
+    top: 48%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -102,15 +143,6 @@ export default {
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-}
-.toggle-checkbox:checked {
-  @apply: right-0 border-green-400;
-  right: 0;
-  border-color: #68D391;
-}
-.toggle-checkbox:checked + .toggle-label {
-  @apply: bg-green-400;
-  background-color: #68D391;
 }
 
 .iphone-x {

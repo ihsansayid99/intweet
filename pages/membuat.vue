@@ -1,35 +1,74 @@
 <template>
     <div>
-        <div class="px-4 lg:px-20 xl:px-24 pt-40 py-60">
-            <h1 class="text-3xl lg:text-5xl text-center leading-normal lg:leading-relaxed font-bold text-blue max-w-3xl mx-auto">Upload Link Tweet atau cari Akun Yang akan di Proses</h1>
+        <div class="px-4 lg:px-20 xl:px-24 pt-40 py-60 lg:py-64" v-if="showCustomize === false">
+            <h1 class="text-3xl lg:text-5xl text-center leading-normal lg:leading-relaxed font-bold text-blue max-w-3xl mx-auto">Upload Link Tweet untuk memulai Membuat Template</h1>
             <div class="text-center mt-10">
-                <input type="text" v-model="linkTweet" class="border-2 rounded-md border-indigo md:w-1/2 w-full px-2 py-2 focus:outline-none focus:border-indigo-light mb-6">
-                <button class="px-6 py-2 font-bold bg-indigo border-2 rounded-md border-indigo text-white" @click="submitLink">Up</button>
+                <input type="text" placeholder="https://twitter.com/jack/status/20" v-model="linkTweet" class="border-2 rounded-md border-indigo md:w-1/2 w-full px-2 py-2 focus:outline-none focus:border-indigo-light mb-6" :class="errors.length ? 'border-red-600' : ''">
+                <button class="px-6 py-2 font-bold bg-indigo border-2 rounded-md border-indigo text-white" @click="submitLink">Mulai Proses</button>
             </div>
-            <!-- <h2 class="text-center text-lg text-indigo mt-4" v-if="loadTweetImage === false">Loading...</h2> -->
+            <Loading v-if="loadTweetImage === false"/>
+        </div>
+        <div v-if="showCustomize">
+          <CustomizeTweet :imgTweet="tweetImage.result" :tweetId="tweetId" />
         </div>
     </div>
 </template>
 
 <script>
 export default {
+  head(){
+        return{
+            title: 'Membuat Template - Intweet',
+            meta: [
+                {
+                    hid: 'Membuat Template Tweet Design',
+                    name: 'Membuat Template Tweet Design',
+                    content: 'Intweet Membuat Template Tweet Design'
+                }
+            ]
+        }
+    },
     data: function(){
         return {
             linkTweet: '',
             responseLink: '',
             tweetId: '',
             tweetImage: '',
-            loadTweetImage: false
+            loadTweetImage: null,
+            showCustomize: false,
+            errors: [],
         }
     },
     methods:{
       async submitLink() {
-        this.tweetImage = await this.$axios.$post('https://intweet-backend.herokuapp.com/api/screenshot', {
-          url: this.linkTweet
-        })
-        console.log(this.tweetImage)
+        const splitTweetUrl = this.linkTweet.split('/')
+        const lastItem = splitTweetUrl[splitTweetUrl.length - 1]
+        const splitLastItem = lastItem.split('?')
+        const checkTweetsValid = this.linkTweet.includes('/status/')
+        const checkTweetsValid2 = this.linkTweet.includes('https://twitter.com/')
+        this.tweetId = splitLastItem[0]
+        this.errors = [];
+        if(this.linkTweet && checkTweetsValid && checkTweetsValid2){
+          this.loadTweetImage = false
+          this.$nuxt.$loading.start()
+          this.tweetImage = await this.$axios.$post('https://intweet-backend.herokuapp.com/api/screenshot', {
+            url: this.linkTweet
+          })
+          this.$nuxt.$loading.finish()
+          this.loadTweetImage = true
+          this.showCustomize = true
+        }else{
+          this.errors.push('Isi Link Tweet nya terlebih dahulu!')
+        }
     },
-  }
+  },
+  mounted() {
+    this.$nextTick(() => {
+        this.$nuxt.$loading.start()
+
+        setTimeout(() => this.$nuxt.$loading.finish(), 1000)
+      })
+  },
 }
 </script>
 
