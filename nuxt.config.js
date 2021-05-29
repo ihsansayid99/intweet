@@ -29,7 +29,12 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap'},
     ],
     script: [
-        {type: 'text/javascript', src: '//platform.twitter.com/widgets.js', async: true, defer: true }
+        {type: 'text/javascript', src: '//platform.twitter.com/widgets.js', async: true, defer: true },
+        {
+          src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+          'data-ad-client': 'ca-pub-6712259079868297',
+          async: true
+        }
     ]
   },
 
